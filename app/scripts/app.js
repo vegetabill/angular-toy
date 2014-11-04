@@ -11,7 +11,8 @@
 angular
   .module('angularToyApp', [
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'ngAnimate'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);

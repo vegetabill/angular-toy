@@ -6,11 +6,17 @@
 
   <h2>Doggies</h2>
 
-  <ul>
-    <li ng-repeat="dog in doggies">
+  <ul class="doggies">
+    <li class="dog" ng-repeat="dog in doggies">
       <a href="#" ng-click="showDogDetails(dog)">{{ dog.name }}</a> - {{ dog.breed.name }}
     </li>
   </ul>
+
+  <form>
+    <h4>Add Dog</h4>
+    <input type="text" placeholder="Max" ng-model="newDogName"></input>
+    <input type="submit" ng-click="addDog(newDogName)"></input>
+  </form>
 
   <form>
     <h3>Details about {{ currentDog.name }}</h3>

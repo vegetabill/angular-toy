@@ -10,7 +10,11 @@
 angular.module('angularToyApp')
   .controller('MainCtrl', function ($scope) {
 
-    $scope.showDogDetails = function(dog) {
+    var addDog = function(name) {
+      $scope.doggies.push({ name: name, breed: null });
+    };
+
+    var showDogDetails = function(dog) {
       $scope.currentDog = dog;
     };
 
@@ -21,19 +25,24 @@ angular.module('angularToyApp')
       { name: 'wolferanian' }
     ];
 
+    var osito = {
+      name: 'osito',
+      breed: breeds[0]
+    };
+
+    var oscuro = {
+      name: 'Curo Bear',
+      breed: breeds[3]
+    };
+
+
+    var doggies = [osito, oscuro];
+
+    showDogDetails({ name: null, breed: null });
+
     $scope.breeds = breeds;
-
-    $scope.doggies = [
-      {
-        name: 'osito',
-        breed: breeds[0]
-      },
-
-      {
-        name: 'Curo Bear',
-        breed: breeds[3]
-      }
-
-    ];
+    $scope.showDogDetails = showDogDetails;
+    $scope.addDog = addDog;
+    $scope.doggies = doggies;
 
   });
