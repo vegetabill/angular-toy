@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('angularToyApp')
-  .controller('DogsIndexCtrl', function ($scope) {
+  .controller('dogs.index', function ($scope) {
     $scope.doggies = $scope.findAllDoggies();
   })
-  .controller('DogEditCtrl', function ($scope, $routeParams) {
+  .controller('dogs.edit', function ($scope, $routeParams) {
     $scope.dog = $scope.findDogByIdentifier($routeParams.identifier);
   });

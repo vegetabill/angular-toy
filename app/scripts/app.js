@@ -15,26 +15,18 @@ angular
     'ngAnimate',
   ])
 
-  .config(function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+  .config(function ($routeProvider) {
     $routeProvider
-
       .when('/', {
-        templateUrl: '/views/dogs.html',
-        controller: 'DogsIndexCtrl'
+        action: 'dogs.index',
+        controller: 'dogs.index'
       })
-      .when('/about', {
-        templateUrl: '/views/about.html',
-        controller: 'AboutCtrl'
+      .when('/dogs', {
+        action: 'dogs.index',
+        controller: 'dogs.index'
       })
       .when('/dogs/:identifier/edit', {
-        templateUrl: '/views/dogs/edit.html',
-        controller: 'DogEditCtrl'
-      })
-      .when('/dogs/new', {
-        templateUrl: '/views/dogs/new.html',
-        controller: 'DogNewCtrl'
+        action: 'dogs.edit',
+        controller: 'dogs.edit'
       });
-
-
   });

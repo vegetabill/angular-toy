@@ -1,5 +1,20 @@
+'use strict';
+
 angular.module('angularToyApp')
-  .controller('AppCtrl', function ($scope) {
+  .controller('root', function ($scope) {
+
+    $scope.renderAction = 'dogs.index';
+    $scope.renderPath = ['dogs', 'index'];
+
+    $scope.$on(
+        '$routeChangeSuccess',
+        function(event, next){
+            var renderAction = next.action;
+            var renderPath = renderAction.split('.');
+            $scope.renderAction = renderAction;
+            $scope.renderPath = renderPath;
+        }
+    );
 
     var breeds = [
       { name: 'paperanian' },
@@ -33,7 +48,7 @@ angular.module('angularToyApp')
 
     $scope.findAllDoggies = function() {
       return doggies;
-    }
+    };
 
     $scope.breeds = breeds;
 

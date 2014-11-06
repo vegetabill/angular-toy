@@ -1,0 +1,12 @@
+<div ng-controller="dogs.index">
+
+  <h2>Doggies</h2>
+
+  <ul class="doggies">
+    <li class="dog" ng-repeat="dog in doggies">
+      <a href="#/dogs/{{dog.identifier}}/edit">{{ dog.name }}</a> - {{ dog.breed.name }}
+    </li>
+  </ul>
+
+
+</div>
