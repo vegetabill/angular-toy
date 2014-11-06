@@ -9,11 +9,16 @@
 
 module.exports = function (grunt) {
 
+  grunt.loadNpmTasks('grunt-debug');
+
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+
+  var filesystem = require('fs');
+
 
   // Configurable paths for the application
   var appConfig = {
@@ -81,6 +86,17 @@ module.exports = function (grunt) {
                 '/bower_components',
                 connect.static('./bower_components')
               ),
+              function serveIndexHtmlForEverything(req, res, next) {
+                if (req.url.split('.').length == 1) {
+                  console.log('serving index.html for pretty URL: ' + req.url);
+                  var contentsOfIndex = filesystem.readFileSync('app/app.html', 'utf8');
+                  res.writeHead(200, {"Content-Type": "text/html"});
+                  res.write(contentsOfIndex);
+                  res.end();
+                } else {
+                  next();
+                }
+              },
               connect.static(appConfig.app)
             ];
           }

@@ -18,7 +18,9 @@ angular
 
 
 
-  .config(function ($urlRouterProvider, $stateProvider) {
+  .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
+
+    $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/dogs');
 
@@ -26,14 +28,14 @@ angular
       .state('dogs',
         {
           url: '/dogs',
-          templateUrl: 'views/dogs/index.html',
+          templateUrl: '/views/dogs/index.html',
           controller: 'dogs.index'
         }
       )
          .state('dogs.edit',
            {
              url: '/:identifier/edit',
-             templateUrl: 'views/dogs/edit.html',
+             templateUrl: '/views/dogs/edit.html',
              controller: 'dogs.edit'
            }
       );
