@@ -1,12 +1,14 @@
-<div ng-controller="dogs.index">
+<div>
 
   <h2>Doggies</h2>
 
   <ul class="doggies">
     <li class="dog" ng-repeat="dog in doggies">
-      <a href="#/dogs/{{dog.identifier}}/edit">{{ dog.name }}</a> - {{ dog.breed.name }}
+      <a ui-sref="dogs.edit({ identifier: dog.identifier })">{{ dog.name }}</a> - {{ dog.breed.name }}
     </li>
   </ul>
+
+  <section ui-view></section>
 
 
 </div>

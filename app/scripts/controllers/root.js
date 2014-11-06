@@ -1,20 +1,15 @@
 'use strict';
 
 angular.module('angularToyApp')
-  .controller('root', function ($scope) {
+  .controller('root', function ($scope, $rootScope) {
 
-    $scope.renderAction = 'dogs.index';
-    $scope.renderPath = ['dogs', 'index'];
-
-    $scope.$on(
-        '$routeChangeSuccess',
-        function(event, next){
-            var renderAction = next.action;
-            var renderPath = renderAction.split('.');
-            $scope.renderAction = renderAction;
-            $scope.renderPath = renderPath;
-        }
-    );
+    $rootScope.$on('$stateChangeStart',
+      function(event, toState, toParams, fromState, fromParams) {
+        console.log('[DEBUG] fromState: ' + fromState.name + " " + fromState.url);
+        console.log('[DEBUG] fromParams: ' + fromParams.identifier);
+        console.log('[DEBUG] toState: ' + toState.name + " " + toState.url);
+        console.log('[DEBUG] toParams: ' + toParams.identifier);
+      });
 
     var breeds = [
       { name: 'paperanian' },

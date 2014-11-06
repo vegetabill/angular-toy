@@ -20,20 +20,23 @@ angular
 
   .config(function ($urlRouterProvider, $stateProvider) {
 
-    $urlRouterProvider.otherwise('/state1');
-
+    $urlRouterProvider.otherwise('/dogs');
 
     $stateProvider
-      .state('state1',
-      {
-        url: '/state1',
-        template: '<h1>First State</h1>'
-      }
-     )
-     .state('state2',
-     {
-       url: '/state2',
-       template: '<h2>SECOND</h2>'
-     });
+      .state('dogs',
+        {
+          url: '/dogs',
+          templateUrl: 'views/dogs/index.html',
+          controller: 'dogs.index'
+        }
+      )
+         .state('dogs.edit',
+           {
+             url: '/:identifier/edit',
+             templateUrl: 'views/dogs/edit.html',
+             controller: 'dogs.edit'
+           }
+      );
+
 
   });
