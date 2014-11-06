@@ -12,21 +12,28 @@ angular
   .module('angularToyApp', [
     'ngResource',
     'ngRoute',
-    'ngAnimate'
+    'ngAnimate',
   ])
+
   .config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
+
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: '/views/dogs.html',
+        controller: 'DogsIndexCtrl'
       })
       .when('/about', {
-        templateUrl: 'views/about.html',
+        templateUrl: '/views/about.html',
         controller: 'AboutCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
+      .when('/dogs/:identifier/edit', {
+        templateUrl: '/views/dogs/edit.html',
+        controller: 'DogEditCtrl'
+      })
+      .when('/dogs/new', {
+        templateUrl: '/views/dogs/new.html',
+        controller: 'DogNewCtrl'
       });
 
 
