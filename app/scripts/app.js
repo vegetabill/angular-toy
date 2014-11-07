@@ -38,6 +38,14 @@ angular
              templateUrl: '/views/dogs/edit.html',
              controller: 'dogs.edit'
            }
+      )
+        .state('dogs.adopt',
+        {
+          url: '/:identifier/adopt',
+          templateUrl: '/views/dogs/adopt.html',
+          controller: 'dogs.adopt'
+        }
+
       );
 
 

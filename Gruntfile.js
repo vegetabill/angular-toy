@@ -9,8 +9,6 @@
 
 module.exports = function (grunt) {
 
-  grunt.loadNpmTasks('grunt-debug');
-
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
@@ -44,10 +42,6 @@ module.exports = function (grunt) {
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
-      },
-      jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -87,33 +81,24 @@ module.exports = function (grunt) {
                 connect.static('./bower_components')
               ),
               function serveIndexHtmlForEverything(req, res, next) {
-                if (req.url.split('.').length == 1) {
+                if (req.url.split('.').length === 1) {
                   var appPage = 'app/index.html';
                   console.log('serving ' + appPage + ' for pretty URL: ' + req.url);
                   var contentsOfIndex = filesystem.readFileSync(appPage, 'utf8');
-                  res.writeHead(200, {"Content-Type": "text/html"});
+                  res.writeHead(200, {'Content-Type': 'text/html'});
                   res.write(contentsOfIndex);
                   res.end();
-                } else {
-                  next();
+                  return;
+                } else if (req.url.split('/bower_components/').length !== 1) {
+                  var newUrl = '/bower_components/' + req.url.split('/bower_components/')[1];
+                  console.log('Rewriting ' + req.url + ' to ' + newUrl);
+                  res.writeHead(302, {'Location': newUrl});
+                  res.end();
+                  return;
                 }
+
+                next();
               },
-              connect.static(appConfig.app)
-            ];
-          }
-        }
-      },
-      test: {
-        options: {
-          port: 9001,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
               connect.static(appConfig.app)
             ];
           }

@@ -6,4 +6,7 @@ angular.module('angularToyApp')
   })
   .controller('dogs.edit', function ($scope, $stateParams) {
     $scope.dog = $scope.findDogByIdentifier($stateParams.identifier);
+  })
+  .controller('dogs.adopt', function($scope) {
+    $scope.message = "Success!";
   });
