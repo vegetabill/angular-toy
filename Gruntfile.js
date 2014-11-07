@@ -88,8 +88,9 @@ module.exports = function (grunt) {
               ),
               function serveIndexHtmlForEverything(req, res, next) {
                 if (req.url.split('.').length == 1) {
-                  console.log('serving index.html for pretty URL: ' + req.url);
-                  var contentsOfIndex = filesystem.readFileSync('app/app.html', 'utf8');
+                  var appPage = 'app/index.html';
+                  console.log('serving ' + appPage + ' for pretty URL: ' + req.url);
+                  var contentsOfIndex = filesystem.readFileSync(appPage, 'utf8');
                   res.writeHead(200, {"Content-Type": "text/html"});
                   res.write(contentsOfIndex);
                   res.end();
